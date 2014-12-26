@@ -1,0 +1,24 @@
+<DOCTTYPE="html">
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Test Event Emitter Script</title>
+		<script src="js/eventemitter.js" type="text/javascript"></script>
+	</head>
+	<body>
+	<script type="text/javascript">
+		window.onload = function () {
+			function Scope() {
+				this.a = 'success';
+			};
+			var obs = new EventEmitter();
+			obs.on('someevent', function () {
+				console.log('event fired...', arguments, this.a);
+			}.bind(new Scope()));
+			obs.fire("someevent", "hello1", "hello2");
+			obs.off('someevent');
+			obs.offAll();
+		};
+	</script>
+	</body>
+</html>
