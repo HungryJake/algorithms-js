@@ -34,7 +34,7 @@ LinkList.prototype = {
 	},
 
 	push: function (value) {
-		if (this.head == null) {
+		if (this.head === null) {
 			this.head = new this.Node(value);
 			return;
 		}
