@@ -32,8 +32,8 @@ THE SOFTWARE.
 */
 
 // TODOs:
-      - put library in CommonJS format to be used in 'required' or 'import' context
-      - wrap code within a JavaScript closure to avoid polluting the global scope
+//      - put library in CommonJS format to be used in 'required' or 'import' context
+//      - wrap code within a JavaScript closure to avoid polluting the global scope
 //    - [done] create a new scope to test whether the task function is executed in that scope
 //    - [done] run parallel and serial tests again
 //    - [done] test what happens if async cb is not called (set a larger timeout?)
@@ -67,7 +67,7 @@ function DelayedTask() {
  */
 DelayedTask.prototype.executioner = function(task, cb) {
   // actual execution of task
-  var taskParams = task.params;
+  var taskParams = task.params || [];
   if (!(taskParams instanceof Array)) {
     taskParams = [taskParams];
   }
