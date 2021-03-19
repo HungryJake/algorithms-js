@@ -1,0 +1,50 @@
+module.exports.fib = function fib(n, store = [null, 1, 1]) {
+  if (store[n]) {
+    return store[n];
+  }
+  let n1, n2;
+  if (store[n-1]) {
+    n1 = store[n-1];
+  } else {
+    n1 = fib(n-1, store);
+    store[n-1] = n1;
+  }
+  if (store[n-2]) {
+    n2 = store[n-2];
+  } else {
+    n2 = fib(n-2, store);
+    store[n-2] = n2;
+  }
+  return n1 + n2;
+}
+
+module.exports.fibTab = function fibTab(n) {
+  let store = [null, 1, 1];
+  if (store[n]) {
+    return store[n];
+  } else if (store[n-1] && store[n-2]) {
+    return store[n-1] + store[n-2];
+  }
+  let i;
+  for (i=3; i<n; i++) {
+    store[i] = store[i-2] + store[i-1];
+  }
+  return store[n-1] + store[n-2];
+}
+
+// console.log(fib(1));
+// console.log(fib(2));
+// console.log(fib(3));
+// console.log(fib(4));
+// console.log(fib(5));
+// console.log(fib(6));
+// console.log(fib(1000));
+
+// console.log(fibTab(1));
+// console.log(fibTab(2));
+// console.log(fibTab(3));
+// console.log(fibTab(4));
+// console.log(fibTab(5));
+// console.log(fibTab(6));
+// console.log(fibTab(30));
+// console.log(fibTab(1000));
