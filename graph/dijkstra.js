@@ -16,14 +16,17 @@ class PriorityQueue {
 
 class WeightedGraph {
   constructor() {
-    this.adjacencyList = {};
+    this.adjacencyList = {}; // format: { 'vertex': ['adj1', 'adj2', ...], ... }
   }
+
   addVertex(vertex) {
     if (!this.adjacencyList[vertex]) {
       this.adjacencyList[vertex] = [];
     }
   }
+
   addEdge(vertex1, vertex2, weight) {
+    // string, string, number
     this.adjacencyList[vertex1].push({ node: vertex2, weight });
     this.adjacencyList[vertex2].push({ node: vertex1, weight });
   }
@@ -32,39 +35,44 @@ class WeightedGraph {
     let nodes = new PriorityQueue();
     let distances = {}; // store each distance from start to each node
     let previous = {}; // store the last node visited
+    let result = [];
 
-    // setup
-    for (let vertex in this.adjacencyList) {
-      if (vertex === start) {
-        nodes.enqueue(vertex, 0);
-        distances[vertex] = 0;
+    // setup configure the pq and hash table
+    for (let key in this.adjacencyList) {
+      if (key === start) {
+        distances[key] = 0;
+        nodes.enqueue(key, 0);
       } else {
-        nodes.enqueue(vertex, Infinity);
-        distances[vertex] = Infinity;
+        distances[key] = Infinity;
+        nodes.enqueue(key, Infinity);
       }
-      previous[vertex] = null;
     }
-    // console.log('nodes: ', nodes);
-    // console.log('distances: ', distances);
-    // console.log('previous: ', previous);
 
+    let closest = null;
     while (nodes.values.length > 0) {
-      let smallest = nodes.dequeue().val; // get A out
-      if (smallest === finish) {
-        // done
-        console.log('Done!');
-        // build the path to return
-        break;
+      closest = nodes.dequeue();
+      for (let key in this.adjacencyList[closest.val]) {
+        const neighbor = this.adjacencyList[closest.val][key];
+        const candidate = distances[closest.val] + neighbor.weight;
+        if (candidate < distances[neighbor.node]) {
+          distances[neighbor.node] = candidate;
+          previous[neighbor.node] = closest.val;
+          nodes.enqueue(neighbor.node, candidate); // why enqueue here? what happens to the initial items in the queue?
+        }
+        // console.log('------');
       }
-      if (smallest || distances[smallest] !== Infinity) {
-        this.adjacencyList[smallest.val].forEach((neighbor) => {
-          console.log('neighbors: ', neighbor);
-          if 
-          const dist = neighbor.weight + distances[]
-        });
-      }
-      console.log('---');
     }
+
+    // console.log('previous', previous);
+    // console.log('pq', nodes);
+
+    //trace previous dictionary to extract the shortest path
+    let next = finish;
+    while (next) {
+      result.unshift(next);
+      next = previous[next];
+    }
+    return result;
   }
 }
 
