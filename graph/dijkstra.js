@@ -32,6 +32,7 @@ class WeightedGraph {
   }
 
   shortestPath(start, finish) {
+    // TODO: handle base cases
     let nodes = new PriorityQueue();
     let distances = {}; // store each distance from start to each node
     let previous = {}; // store the last node visited
@@ -44,7 +45,7 @@ class WeightedGraph {
         nodes.enqueue(key, 0);
       } else {
         distances[key] = Infinity;
-        nodes.enqueue(key, Infinity);
+        nodes.enqueue(key, Infinity); // TODO: find out what if I don't enqueue initial infinity vertexes
       }
     }
 
