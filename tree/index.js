@@ -3,6 +3,7 @@ const { TreeNode, bfsTraverse, recursiveTraverse } = require('./tree-node');
 const invertTree = require('./invert-tree');
 const maxDepth = require('./max-depth');
 const {rightFirstTraverse, rightFirstTraversalRecursive } = require('./right-first-traversal');
+const { inorderTraversalIterative, inorderTraversalRecursive } = require('./inorder-traversal');
 
 // const grid1 = [
 //   ["1","1","1","1","0"],
@@ -46,7 +47,11 @@ let root = new TreeNode(4, two, seven);
 console.log('starting...');
 // recursiveTraverse(root);
 // const result = rightFirstTraverse(root); // should be 4 -> 7 -> 9 -> 6 -> 2 -> 3 -> 1
-const result = rightFirstTraversalRecursive(root); // should be 4 -> 7 -> 9 -> 6 -> 2 -> 3 -> 1
+// const result = rightFirstTraversalRecursive(root); // should be 4 -> 7 -> 9 -> 6 -> 2 -> 3 -> 1
+
+// tree in order traversal
+// const result = inorderTraversalIterative(root); //  1 -> 2 -> 3 -> 4 -> 6 -> 7 -> 9
+const result = inorderTraversalRecursive(root);
 while (result.length > 0) {
    console.log(result.shift());
 }
